@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GCodeWinForm
 {
-    public partial class Form1 : Form
+    public partial class CreationSimpleBlock : Form
     {
-        private StartValues _row;
+        private SimpleValues _block;
         private Generator _generator;
 
         private float _speed;
@@ -21,7 +14,7 @@ namespace GCodeWinForm
         private float _step;
         private float _count;
 
-        public Form1()
+        public CreationSimpleBlock()
         {
             InitializeComponent();
             textBox1.TextChanged += textBox1_Speed;
@@ -64,11 +57,11 @@ namespace GCodeWinForm
         private void button1_Generate(object sender, EventArgs e)
         {
 
-            _row = new StartValues(_speed, _length, _depth, _step);
+            _block = new SimpleValues(_speed, _length, _depth, _step);
 
             SetName();
 
-            _generator.CreateBlock(_row, _count);
+            _generator.CreateSimpleBlock(_count, _block);
             _generator.ShowCode();
         }
 
@@ -80,7 +73,7 @@ namespace GCodeWinForm
             }
             catch
             {
-                if (textBox.Text != "")
+                if (textBox.Text != "" && textBox.Text != "-")
                 {
                     MessageBox.Show("Не верный ввод!");
                     textBox.Text = "";
@@ -95,6 +88,19 @@ namespace GCodeWinForm
 
             string filename = saveFileDialog1.FileName;
             _generator.InputFileName(filename);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FasterBlock fasterBlock = new FasterBlock();
+            fasterBlock.Show();
+        }
+
+        private void button3_Example(object sender, EventArgs e)
+        {
+            ExampleImage exampleImage = new ExampleImage();
+            exampleImage.Show();
+            exampleImage.ChangeBackgroundPicture(0);
         }
     }
 }

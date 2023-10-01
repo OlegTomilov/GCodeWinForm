@@ -1,40 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GCodeWinForm
 {
     internal class Generator
     {
-        private CodeSymbol _block = new CodeSymbol();
+        private CodeSymbol _symbol = new CodeSymbol();
+        private StringBuilder _block;
         private string _path = "test.txt";
 
-        public async void CreateBlock(StartValues value, float count)
+        public void CreateSimpleBlock(float count, SimpleValues simple)
         {
             float yPosition = 0;
 
-            for (int i = 0; i < count; i++) 
+            for (int i = 0; i < count; i++)
             {
-                StringBuilder block = new StringBuilder( $"{_block.F}{500} {_block.X}{0} {_block.Y}{yPosition} {_block.Z}{0}\n" +
-                    $"{_block.F}{50} {_block.X}{0} {_block.Y}{yPosition} {_block.Z}{value.Depth}\n" +
-                    $"{_block.F}{value.Speed} {_block.X}{value.Length} {_block.Y}{yPosition} {_block.Z}{value.Depth}\n");
+                BlockSimple block = new BlockSimple(_symbol, simple, yPosition);
 
-                string blockString = block.ToString();
+                _block = new StringBuilder(block.Simple);
+                string blockString = _block.ToString();
+                WriteBlock(i, blockString);
 
-                using (StreamWriter writer = new StreamWriter(_path, true))
+                yPosition += simple.Step;
+            }
+        }
+
+        public void CreateMideleBlock(float count, MidleValues midle)
+        {
+            float yPosition = 0;
+
+            for (int i = 0; i < count; i++)
+            {
+                float depth = midle.Depth;
+
+                for (int j = 0; j < midle.CountOfDepth; j++)
                 {
-                    if(i <= 0)
-                        writer.WriteLine($"{_block.G}{1}");
+                    BlockMidle block = new BlockMidle(_symbol, midle, yPosition, depth);
 
-                    await writer.WriteLineAsync(blockString);
+                    _block = new StringBuilder(block.Midle);
+                    string blockString = _block.ToString();
+                    WriteBlock(i, blockString, j);
+
+                    depth += midle.Depth;
                 }
 
-                yPosition += value.Step;
+                yPosition += midle.Step;
             }
         }
 
@@ -50,6 +61,17 @@ namespace GCodeWinForm
         public void InputFileName(string filename)
         {
             _path = filename;
+        }
+
+        private async void WriteBlock(int i, string block, int j = 2)
+        {
+            using (StreamWriter writer = new StreamWriter(_path, true))
+            {
+                if (i <= 0 && j <= 0)
+                    writer.WriteLine($"{_symbol.G}{1}");
+
+                await writer.WriteLineAsync(block);
+            }
         }
     }
 }

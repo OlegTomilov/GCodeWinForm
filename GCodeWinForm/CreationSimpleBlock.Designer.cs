@@ -1,6 +1,6 @@
 ﻿namespace GCodeWinForm
 {
-    partial class Form1
+    partial class CreationSimpleBlock
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -41,6 +41,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -55,11 +57,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(252, 42);
+            this.label1.Location = new System.Drawing.Point(240, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(317, 29);
+            this.label1.Size = new System.Drawing.Size(317, 58);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Окно ввода параметров";
+            this.label1.Text = "Окно ввода параметров\r\nпростого блока\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -145,7 +148,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(328, 342);
+            this.button1.Location = new System.Drawing.Point(146, 342);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 44);
             this.button1.TabIndex = 12;
@@ -153,11 +156,33 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Generate);
             // 
-            // Form1
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(488, 342);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(106, 44);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Ускореный блок";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(54, 447);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(111, 35);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "Инструкция";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Example);
+            // 
+            // CreationSimpleBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(761, 526);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -170,8 +195,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "CreationSimpleBlock";
+            this.Text = "Простой блок";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,6 +216,8 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
