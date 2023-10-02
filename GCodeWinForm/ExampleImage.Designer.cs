@@ -51,7 +51,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "ExampleImage";
             this.Text = "Пример";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

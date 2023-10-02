@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GCodeWinForm
@@ -13,9 +14,9 @@ namespace GCodeWinForm
         public void ChangeBackgroundPicture(int value)
         {
             if (value == 0)
-                pictureBox1.BackgroundImage = Image.FromFile("C:\\Users\\PC\\source\\repos\\GCodeWinForm\\GCodeWinForm\\Image\\simpleExample.png");
+                pictureBox1.BackgroundImage = Image.FromFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Image\\simpleExample.png"));
             else
-                pictureBox1.BackgroundImage = Image.FromFile("C:\\Users\\PC\\source\\repos\\GCodeWinForm\\GCodeWinForm\\Image\\mildeExample.png");
+                pictureBox1.BackgroundImage = Image.FromFile(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Image\\midleExample.png"));
         }
     }
 }

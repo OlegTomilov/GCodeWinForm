@@ -51,10 +51,17 @@ namespace GCodeWinForm
 
         public void ShowCode()
         {
-            using (StreamReader reader = new StreamReader(_path))
+            try
             {
-                string text = reader.ReadToEnd();
-                MessageBox.Show(text);
+                using (StreamReader reader = new StreamReader(_path))
+                {
+                    string text = reader.ReadToEnd();
+                    MessageBox.Show(text);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Файл не создан!", "Супервнимание!!!");
             }
         }
 
